@@ -1,0 +1,22 @@
+{
+  "name": "lzaplata/smartemailing",
+  "description": "SmartEmailing wrapper for Nette Framework.",
+  "keywords": ["nette", "smartemailing"],
+  "homepage": "https://github.com/LZaplata/SmartEmailing",
+  "license": "New BSD",
+  "authors": [
+    {
+      "name": "Lukáš Záplata",
+      "email": "lukas.zaplata@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4",
+    "nette/di": "~2.3",
+    "nette/utils": "~2.3",
+    "guzzlehttp/guzzle": "5.3.1"
+  },
+  "autoload": {
+    "classmap": ["src/"]
+  }
+}
