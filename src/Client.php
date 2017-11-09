@@ -153,4 +153,22 @@ class Client extends Object
             throw new InvalidArgumentException($e->getMessage());
         }
     }
+
+    /**
+     * @param int $id
+     * @throws InvalidArgumentException
+     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
+     */
+    public function getEmail($id)
+    {
+        if (!isset($id)) {
+            throw new InvalidArgumentException("E-mail ID must be set.");
+        } elseif (!Validators::isNumericInt($id)) {
+            throw new InvalidArgumentException("E-mail ID must be integer.");
+        }
+
+        $url = $this->baseUrl . "/emails/" . $id;
+
+        return $this->client->get($url);
+    }
 }

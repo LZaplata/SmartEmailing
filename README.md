@@ -41,11 +41,22 @@ public $smartEmailingClient;
 ## Usage
 
 ### Import contact
-You can import contact to your contactlist.
 
 ````php
 try {
     $this->smartEmailingClient->importContact($email, $contactlistId);
+} catch (\Exception $e) {
+    echo $e->getMessage();
+}
+````
+
+### Get single email
+
+````php
+try {
+    $request = $this->smartEmailingClient->getEmail($id);
+    
+    echo $request->json();
 } catch (\Exception $e) {
     echo $e->getMessage();
 }
