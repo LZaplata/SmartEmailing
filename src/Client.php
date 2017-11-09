@@ -80,7 +80,6 @@ class Client extends Object
     {
         $this->isEmailInContactlist($email, $contactlistId);
 
-
         $url = $this->baseUrl . "/import";
         $body = [
             "data" => [[
@@ -182,6 +181,23 @@ class Client extends Object
             throw new InvalidArgumentException("Parameter must be instance of LZaplata\SmartEmailing\Helpers\Email");
         }
 
+        $url = $this->baseUrl . "/send/custom-emails";
+        $batch = [
+            "batch" => [[
+                "custom_id" => $email->getCustomId(),
+                "sendername" => $email->getSenderName(),
+                "senderemail" => $email->getSenderEmail(),
+                "recipientname" => $email->getRecipientName(),
+                "recipientemail" => $email->getRecipientEmail(),
+                "email" => [
+                    "subject" => $email->getSubject(),
+                    "htmlbody" => $email->getHtmlBody()
+                ]
+            ]]
+        ];
 
+        return $this->client->post($url, [
+            "batch" => Json::encode($batch)
+        ]);
     }
 }
