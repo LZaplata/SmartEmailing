@@ -61,3 +61,25 @@ try {
     echo $e->getMessage();
 }
 ````
+
+### Send custom email
+
+First of all you have to declare `LZaplata\SmartEmailing\Helpers\Email` object and then pass it as parameter to `sendCustomEmail` function.
+
+````php
+try {
+    $email = new Email();
+    $email->setSender($senderEmail, $senderName);
+    $email->setRecipient($recipientEmail, $recipientName);
+    $email->setSubject($subject);
+    $email->setHtmlBody($html);
+    $email->setTag($tag);
+    $email->setReplacements([
+        "key" => "content"
+    ]);
+
+    $this->smartEmailingClient->sendCustomEmail($email);
+} catch (\Exception $e) {
+    echo($e->getMessage());
+}
+````
