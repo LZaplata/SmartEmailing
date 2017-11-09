@@ -35,7 +35,7 @@ class Email extends Object
     private $replacements;
 
     /** @var  string */
-    private $tag;
+    private $tag = "custom_tag";
 
     /**
      * Email constructor.
@@ -196,7 +196,7 @@ class Email extends Object
      * @param string $tag
      * @return void
      */
-    public function setTag($tag = "custom_tag")
+    public function setTag($tag)
     {
         $this->tag = $tag;
     }
