@@ -34,6 +34,9 @@ class Email extends Object
     /** @var  array */
     private $replacements;
 
+    /** @var  string */
+    private $tag;
+
     /**
      * Email constructor.
      */
@@ -187,5 +190,22 @@ class Email extends Object
     public function getReplacements()
     {
         return $this->replacements;
+    }
+
+    /**
+     * @param string $tag
+     * @return void
+     */
+    public function setTag($tag = "custom_tag")
+    {
+        $this->tag = $tag;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTag()
+    {
+        return $this->tag;
     }
 }
