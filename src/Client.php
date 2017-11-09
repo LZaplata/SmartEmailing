@@ -4,6 +4,7 @@ namespace LZaplata\SmartEmailing;
 
 
 use GuzzleHttp\Exception\RequestException;
+use LZaplata\SmartEmailing\Helper\Email;
 use Nette\InvalidArgumentException;
 use Nette\Object;
 use Nette\Utils\Json;
@@ -170,5 +171,17 @@ class Client extends Object
         $url = $this->baseUrl . "/emails/" . $id;
 
         return $this->client->get($url);
+    }
+
+    /**
+     * @param Email $email
+     */
+    public function sendCustomEmail($email)
+    {
+        if (!$email instanceof Email) {
+            throw new InvalidArgumentException("Parameter must be instance of LZaplata\SmartEmailing\Helpers\Email");
+        }
+
+
     }
 }
