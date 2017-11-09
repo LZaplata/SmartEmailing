@@ -174,6 +174,7 @@ class Client extends Object
 
     /**
      * @param Email $email
+     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
      */
     public function sendCustomEmail($email)
     {
@@ -182,13 +183,14 @@ class Client extends Object
         }
 
         $url = $this->baseUrl . "/send/custom-emails";
-        $batch = [
+        $body = [
             "batch" => [[
                 "custom_id" => $email->getCustomId(),
                 "sendername" => $email->getSenderName(),
                 "senderemail" => $email->getSenderEmail(),
                 "recipientname" => $email->getRecipientName(),
                 "recipientemail" => $email->getRecipientEmail(),
+                "tag" => $email->getTag(),
                 "email" => [
                     "subject" => $email->getSubject(),
                     "htmlbody" => $email->getHtmlBody()
@@ -196,8 +198,15 @@ class Client extends Object
             ]]
         ];
 
+        foreach ($email->getReplacements() as $key => $replacement) {
+            $body["batch"][0]["replace"][] = [
+                "key" => $key,
+                "content" => $replacement
+            ];
+        }
+
         return $this->client->post($url, [
-            "batch" => Json::encode($batch)
+            "body" => Json::encode($body)
         ]);
     }
 }
