@@ -3,7 +3,6 @@
   "description": "SmartEmailing wrapper for Nette Framework.",
   "keywords": ["nette", "smartemailing"],
   "homepage": "https://github.com/LZaplata/SmartEmailing",
-  "license": "New BSD",
   "authors": [
     {
       "name": "Lukáš Záplata",
